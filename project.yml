@@ -17,3 +17,11 @@ packages:
             sourceType: scheduler
             sourceDetails:
               cron: "0 8,12,16,20 * * *"
+      - name: disable_scheduler
+        environment:
+          BEARER_TOKEN: ${BEARER_TOKEN}
+          FUNCTION_NAMESPACE: ${FUNCTION_NAMESPACE}
+        binary: false
+        main: "main"
+        runtime: nodejs:18
+        web: true

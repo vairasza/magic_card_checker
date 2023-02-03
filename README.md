@@ -10,3 +10,5 @@ digital ocean:
 serverless
 1) .env .gitignore project.yml must be on top level
 2) package.json must be in the function folder
+3) main function needs to be exported and probably async
+4) environment variables are accessible by registering them in project.yml

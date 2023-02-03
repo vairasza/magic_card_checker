@@ -1,0 +1,13 @@
+{
+  "name": "disable_scheduler",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "disables scheduler function after magic cards are available",
+  "main": "disable_scheduler.js",
+  "author": "vairasza",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "dotenv": "^16.0.3"
+  }
+}

@@ -39,7 +39,7 @@ export async function main(args) {
             let message = await twilio.messages.create({
                 to: process.env.PERSONAL_PHONE_NUMBER,
                 from: process.env.TWILIO_PHONE_NUMBER,
-                body: `Kamigawa: Neon Dynasty Display Set Booster is available on ${sites[i].site}`,
+                body: `Kamigawa: Neon Dynasty Display Set Booster is available on ${sites[i].site}. Please disable this function if you dont need it anymore: "https://faas-fra1-afec6ce7.doserverless.co/api/v1/web/${FUNCTION_NAMESPACE}/functions/disable_scheduler"`,
             })
             messageIds.push(message.sid)
         }
