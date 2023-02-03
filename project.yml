@@ -10,11 +10,10 @@ packages:
           PERSONAL_PHONE_NUMBER: "${PERSONAL_PHONE_NUMBER}"
         binary: false
         main: "main"
-        runtime: nodejs:default
-        web: true
-        websecure: false
+        runtime: nodejs:18
+        web: false
         triggers:
           - name: trigger_magic_card
             sourceType: scheduler
             sourceDetails:
-              cron: "* 8,12,16,20 * * *"
+              cron: "0 8,12,16,20 * * *"

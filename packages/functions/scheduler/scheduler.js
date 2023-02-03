@@ -1,5 +1,4 @@
 import * as cheerio from "cheerio";
-import request from "request";
 import Twilio from "twilio"
 
 const sites = [
@@ -23,27 +22,30 @@ const sites = [
     }
 ]
 
-export function main(args) {
-    sites.forEach(async site => {
-        
-        request(site.url, (err, t, body) => {
-            const data = cheerio.load(body)
-            const result = data('body').find(site.path).text().trim()
+export async function main(args) {
+    const messageIds = []
 
-            if(result !== site.check && result !== "") {
-                const accountSid = process.env.TWILIO_ACCOUNT_SID; 
-                const authToken = process.env.TWILIO_AUTH_TOKEN;
-                const twilio = new Twilio(accountSid, authToken)
+    for (let i = 0; i < sites.length; i++) {
+        const res = await fetch(sites[i].url)
+        const text = await res.text();
+        const data = cheerio.load(text)
+        const result = data('body').find(sites[i].path).text().trim()
 
-                twilio.messages.create({
-                    to: process.env.PERSONAL_PHONE_NUMBER,
-                    from: process.env.TWILIO_PHONE_NUMBER,
-                    body: `Kamigawa: Neon Dynasty Display Set Booster is available on ${site.site}`,
-                })
-                .done();        
-            }
-        })
-    })
+        if(result === sites[i].check && result !== "") {
+            const accountSid = process.env.TWILIO_ACCOUNT_SID; 
+            const authToken = process.env.TWILIO_AUTH_TOKEN;
+            const twilio = new Twilio(accountSid, authToken)
 
-    return {"body": "ok"}
+            let message = await twilio.messages.create({
+                to: process.env.PERSONAL_PHONE_NUMBER,
+                from: process.env.TWILIO_PHONE_NUMBER,
+                body: `Kamigawa: Neon Dynasty Display Set Booster is available on ${sites[i].site}`,
+            })
+            messageIds.push(message.sid)
+        }
+    }
+
+    return {"body": {
+        messageIds: messageIds,
+    }}
 }
