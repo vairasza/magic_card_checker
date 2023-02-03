@@ -1,0 +1,20 @@
+packages:
+  - name: functions
+    shared: false
+    functions:
+      - name: scheduler
+        environment:
+          TWILIO_ACCOUNT_SID: "${TWILIO_ACCOUNT_SID}"
+          TWILIO_AUTH_TOKEN: "${TWILIO_AUTH_TOKEN}"
+          TWILIO_PHONE_NUMBER: "${TWILIO_PHONE_NUMBER}"
+          PERSONAL_PHONE_NUMBER: "${PERSONAL_PHONE_NUMBER}"
+        binary: false
+        main: "main"
+        runtime: nodejs:default
+        web: true
+        websecure: false
+        triggers:
+          - name: trigger_magic_card
+            sourceType: scheduler
+            sourceDetails:
+              cron: "* * * * *"

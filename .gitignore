@@ -1,0 +1,6 @@
+.deployed
+node_modules
+package-lock.json
+.DS_Store
+.env
+__deployer__.zip

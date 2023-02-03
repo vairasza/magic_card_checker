@@ -1,0 +1,16 @@
+{
+  "name": "scheduler",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "checks the price of magic cards",
+  "main": "scheduler.js",
+  "author": "vairasza",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "request": "^2.88.2",
+    "twilio": "^3.84.1"
+  },
+  "devDependencies": {}
+}
