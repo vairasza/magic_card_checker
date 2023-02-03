@@ -31,7 +31,7 @@ export async function main(args) {
         const data = cheerio.load(text)
         const result = data('body').find(sites[i].path).text().trim()
 
-        if(result === sites[i].check && result !== "") {
+        if(result !== sites[i].check && result !== "") {
             const accountSid = process.env.TWILIO_ACCOUNT_SID; 
             const authToken = process.env.TWILIO_AUTH_TOKEN;
             const twilio = new Twilio(accountSid, authToken)
